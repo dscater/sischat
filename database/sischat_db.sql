@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 07-05-2024 a las 18:53:48
+-- Tiempo de generación: 14-04-2025 a las 01:19:50
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 7.4.19
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `siscrm_db`
+-- Base de datos: `sischat_db`
 --
 
 -- --------------------------------------------------------
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `api_maps` (
   `id` bigint UNSIGNED NOT NULL,
-  `google_maps` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `map_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `google_maps` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `map_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -50,15 +50,15 @@ INSERT INTO `api_maps` (`id`, `google_maps`, `map_id`, `created_at`, `updated_at
 
 CREATE TABLE `campanias` (
   `id` bigint UNSIGNED NOT NULL,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha_ini` date NOT NULL,
   `fecha_fin` date NOT NULL,
-  `tipo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tipo_cliente` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `filtro_cliente` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tipo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo_cliente` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `filtro_cliente` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `producto_id` bigint UNSIGNED DEFAULT NULL,
   `cantidad_compra` double(10,2) DEFAULT NULL,
-  `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `catalogo_id` bigint UNSIGNED DEFAULT NULL,
   `fecha_registro` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -71,7 +71,7 @@ CREATE TABLE `campanias` (
 
 INSERT INTO `campanias` (`id`, `nombre`, `fecha_ini`, `fecha_fin`, `tipo`, `tipo_cliente`, `filtro_cliente`, `producto_id`, `cantidad_compra`, `descripcion`, `catalogo_id`, `fecha_registro`, `created_at`, `updated_at`) VALUES
 (6, 'CAMPAÑA #1', '2024-04-28', '2024-05-05', 'GIFTCARD', 'TODOS', '', NULL, NULL, 'DESCRIPCION CAMPAÑA #1 TODOS LOS CLIENTES MOD', NULL, '2024-04-28', '2024-04-28 17:17:04', '2024-05-03 20:11:55'),
-(7, 'CAMPAÑA #2', '2024-04-28', '2024-05-05', 'CATÁLOGO', 'PERSONALIZADO', 'CLIENTES ESPECIFICOS', 7, NULL, 'DESC. CAMPAÑA #2', 1, '2024-04-28', '2024-04-28 17:19:53', '2024-05-03 20:54:32'),
+(7, 'CAMPAÑA #2', '2024-04-28', '2024-05-08', 'CATÁLOGO', 'PERSONALIZADO', 'CLIENTES ESPECIFICOS', 7, NULL, 'DESC. CAMPAÑA #2', 1, '2024-04-28', '2024-04-28 17:19:53', '2024-05-08 20:21:59'),
 (8, 'CAMPAÑA #3', '2024-04-28', '2024-04-29', 'CATÁLOGO', 'PERSONALIZADO', 'PRODUCTO COMPRADO', 3, NULL, 'DESCRIPCION CAMP 3', 2, '2024-04-28', '2024-04-28 17:21:37', '2024-04-30 14:08:34'),
 (9, 'CAMPAÑA 4', '2024-04-28', '2024-04-29', 'RECORDATORIO', 'PERSONALIZADO', 'CANTIDAD COMPRA', NULL, 3.00, 'DESC CAMP 4', NULL, '2024-04-28', '2024-04-28 17:23:27', '2024-04-28 17:23:28'),
 (11, 'CAMPAÑA 5', '2024-04-28', '2024-04-29', 'RECORDATORIO', 'PERSONALIZADO', 'CLIENTES ESPECIFICOS', NULL, NULL, 'DESC. CAMPAÑA 5', NULL, '2024-04-28', '2024-04-28 17:24:49', '2024-04-28 17:24:49');
@@ -85,12 +85,12 @@ INSERT INTO `campanias` (`id`, `nombre`, `fecha_ini`, `fecha_fin`, `tipo`, `tipo
 CREATE TABLE `campania_automaticas` (
   `id` bigint UNSIGNED NOT NULL,
   `campania_id` bigint UNSIGNED NOT NULL,
-  `tipo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha_registro` date NOT NULL,
   `fecha_ini` date DEFAULT NULL,
   `fecha_fin` date DEFAULT NULL,
-  `frecuencia` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `dias` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `frecuencia` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dias` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -123,7 +123,8 @@ CREATE TABLE `campania_detalles` (
 
 INSERT INTO `campania_detalles` (`id`, `campania_id`, `cliente_id`, `created_at`, `updated_at`) VALUES
 (7, 11, 7, '2024-04-28 17:33:03', '2024-04-28 17:33:03'),
-(16, 7, 6, '2024-05-03 22:07:48', '2024-05-03 22:07:48');
+(18, 7, 7, '2024-05-08 20:21:59', '2024-05-08 20:21:59'),
+(19, 7, 6, '2024-05-08 20:21:59', '2024-05-08 20:21:59');
 
 -- --------------------------------------------------------
 
@@ -151,7 +152,8 @@ INSERT INTO `campania_envios` (`id`, `campania_id`, `campania_automatico_id`, `f
 (2, 6, NULL, '2024-04-29', 6, 3, '2024-04-29 16:11:10', '2024-04-29 16:42:44'),
 (3, 7, NULL, '2024-04-29', 0, 2, '2024-04-29 16:12:19', '2024-04-29 16:45:43'),
 (4, 6, NULL, '2024-05-03', 17, 7, '2024-05-03 20:12:06', '2024-05-03 20:54:02'),
-(5, 7, NULL, '2024-05-03', 12, 44, '2024-05-03 20:22:07', '2024-05-03 22:08:00');
+(5, 7, NULL, '2024-05-03', 12, 44, '2024-05-03 20:22:07', '2024-05-03 22:08:00'),
+(6, 7, NULL, '2024-05-08', 1, 1, '2024-05-08 20:22:10', '2024-05-08 20:22:16');
 
 -- --------------------------------------------------------
 
@@ -161,7 +163,7 @@ INSERT INTO `campania_envios` (`id`, `campania_id`, `campania_automatico_id`, `f
 
 CREATE TABLE `catalogos` (
   `id` bigint UNSIGNED NOT NULL,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -222,13 +224,40 @@ INSERT INTO `categorias` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `chats`
+--
+
+CREATE TABLE `chats` (
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `mensaje` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `chats`
+--
+
+INSERT INTO `chats` (`id`, `user_id`, `mensaje`, `tipo`, `created_at`, `updated_at`) VALUES
+(1, 10, 'Aquí tienes la sugerencia del día:<br/><a href=\"\" class=\"prod_sugerencia\" data-producto=\"1\">PASTILLAS A</a><br/><small>Haz click sobre el producto para agregarlo a tu carrito</small>', 'sistema', '2025-04-14 00:58:39', '2025-04-14 00:58:39'),
+(2, 10, '¿Estas buscando algo de esto?<br/><a href=\"\" class=\"prod_sugerencia\" data-producto=\"3\">PRODUCTO 3</a><br/>', 'sistema', '2025-04-14 01:00:14', '2025-04-14 01:00:14'),
+(3, 10, '¿Estas buscando algo de esto?<br/><a href=\"\" class=\"prod_sugerencia\" data-producto=\"3\">PRODUCTO 3</a><br/><a href=\"\" class=\"prod_sugerencia\" data-producto=\"7\">PRODUCTO 4</a><br/><a href=\"\" class=\"prod_sugerencia\" data-producto=\"10\">PRODUCTO NUEVO P0044</a><br/>', 'sistema', '2025-04-14 01:00:20', '2025-04-14 01:00:20'),
+(4, 10, 'No encontré el producto que buscas', 'sistema', '2025-04-14 01:03:40', '2025-04-14 01:03:40'),
+(5, 10, 'gel', 'usuario', '2025-04-14 01:18:42', '2025-04-14 01:18:42'),
+(6, 10, '¿Estas buscando algo de esto?<br/><a href=\"\" class=\"prod_sugerencia\" data-producto=\"2\">GEL ANTIBACTERIAL</a><br/>', 'sistema', '2025-04-14 01:18:42', '2025-04-14 01:18:42');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `clientes`
 --
 
 CREATE TABLE `clientes` (
   `id` bigint UNSIGNED NOT NULL,
   `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `apellidos` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `apellidos` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ci` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `ci_exp` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `nit` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -236,7 +265,7 @@ CREATE TABLE `clientes` (
   `correo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `dir` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_id` bigint UNSIGNED DEFAULT NULL,
-  `tipo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha_registro` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -250,12 +279,13 @@ INSERT INTO `clientes` (`id`, `nombre`, `apellidos`, `ci`, `ci_exp`, `nit`, `fon
 (1, 'PEDRO MARTINEZ', NULL, '231231', 'LP', '', '', 'pedro@gmail.com', 'LOS OLIVOS', 3, 'FISICO', '2023-04-26', '2023-04-26 20:00:10', '2024-04-29 16:17:22'),
 (2, 'MARIA GONZALES CASAS', NULL, '1231231', 'CB', '34324111', '666666; 7777777', 'maria@gmail.com', 'LOS OLIVOS', 7, 'FISICO', '2023-04-26', '2023-04-26 20:05:20', '2024-04-29 16:17:16'),
 (6, 'PABLO SANCHEZ', NULL, '3223423', 'LP', '', '77575383', 'pablo@gmail.com', '', 9, 'FISICO', '2024-04-25', '2024-04-25 16:20:39', '2024-04-29 16:17:12'),
-(7, 'MARCOS MAMANI', NULL, '434334', 'LP', '8888888888', '73594451', 'victorgonzalo.as@gmail.com', 'LOS OLIVOS', 10, 'ECOMMERCE', '2024-04-26', '2024-04-26 16:17:30', '2024-04-26 16:17:30'),
+(7, 'MARCOS MAMANI', NULL, '434334', 'LP', '8888888888', '73594451', 'marcos@gmail.com', 'LOS OLIVOS', 10, 'ECOMMERCE', '2024-04-26', '2024-04-26 16:17:30', '2024-04-26 16:17:30'),
 (8, 'SARA GONZALES', NULL, '32233', 'LP', '2323232', '', 'sara@gmail.com', 'LOS OLIVOS', 11, 'ECOMMERCE', '2024-04-30', '2024-04-30 16:38:31', '2024-04-30 16:38:31'),
 (9, 'MARTIN', 'COLQUE MAMANI', '543543543', 'CB', '533234234234', '', 'martin@gmail.com', 'LOS OLIVOS', 12, 'FISICO', '2024-05-06', '2024-05-06 17:44:07', '2024-05-06 17:44:07'),
 (10, 'MARISOL', 'GONZALES', '43343434', 'SC', '', '', 'marisol@gmail.com', '', 13, 'FISICO', '2024-05-06', '2024-05-06 17:44:47', '2024-05-06 17:44:47'),
 (11, 'MARITZA', 'TAPIA', '4334343', 'SC', '', '', 'a', 'A', 14, 'FISICO', '2024-05-06', '2024-05-06 17:49:50', '2024-05-06 17:49:50'),
-(12, 'ALVARO', 'CARDENAS', '343434', 'SC', '', '', 'alvaro@gmail.com', 'LOS OLIVOS', 15, 'FISICO', '2024-05-06', '2024-05-06 17:57:03', '2024-05-06 20:13:25');
+(12, 'ALVARO', 'CARDENAS', '343434', 'SC', '', '', 'alvaro@gmail.com', 'LOS OLIVOS', 15, 'FISICO', '2024-05-06', '2024-05-06 17:57:03', '2024-05-06 20:13:25'),
+(13, 'LUIS', 'CARDENAS', '234234', 'LP', '', '', 'luis@gmail.com', 'LOS OLIVOS', 16, 'ECOMMERCE', '2024-05-09', '2024-05-10 02:50:13', '2024-05-10 02:50:13');
 
 -- --------------------------------------------------------
 
@@ -276,21 +306,21 @@ CREATE TABLE `configuracions` (
   `actividad` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `correo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `logo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `servicios` text COLLATE utf8mb4_unicode_ci,
-  `servicios_img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mision` text COLLATE utf8mb4_unicode_ci,
-  `mision_img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `vision` text COLLATE utf8mb4_unicode_ci,
-  `vision_img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nosotros` text COLLATE utf8mb4_unicode_ci,
-  `nosotros_img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `facebook` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `instagram` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `twitter` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `youtube` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `servicios` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `servicios_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mision` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `mision_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `vision` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `vision_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nosotros` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `nosotros_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `facebook` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instagram` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `twitter` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `youtube` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ubicacion` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `captcha_local` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `captcha_servidor` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `captcha_local` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `captcha_servidor` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -300,7 +330,7 @@ CREATE TABLE `configuracions` (
 --
 
 INSERT INTO `configuracions` (`id`, `nombre_sistema`, `alias`, `razon_social`, `nit`, `ciudad`, `dir`, `fono`, `web`, `actividad`, `correo`, `logo`, `servicios`, `servicios_img`, `mision`, `mision_img`, `vision`, `vision_img`, `nosotros`, `nosotros_img`, `facebook`, `instagram`, `twitter`, `youtube`, `ubicacion`, `captcha_local`, `captcha_servidor`, `created_at`, `updated_at`) VALUES
-(1, 'SISTEMA DE INVENTARIO Y VENTAS', 'SISCRM', 'EMPRESA PRUEBA S.A.', '10000000000', 'LA PAZ', 'LA PAZ', '222222', '', 'ACTIVIDAD', 'SISCRM@GMAIL.COM', '1682712649_logo.jpg', 'SERVICIOS. THERE ARE MANY VARIATIONS OF PASSAGES OF LOREM IPSUM AVAILABLE, BUT THE MAJORITY HAVE SUFFERED ALTERATION IN SOME FORM, BY INJECTED HUMOUR, OR RANDOMISED WORDS WHICH DON\'T LOOK EVEN SLIGHTLY BELIEVABLE. IF YOU ARE GOING TO USE A PASSAGE OF LOREM IPSUM, YOU NEED TO BE SURE THERE ISN\'T ANYTHING EMBARRASSING HIDDEN IN THE MIDDLE OF TEXT', '1714488423_servicios_img.jpg', 'MISION. THERE ARE MANY VARIATIONS OF PASSAGES OF LOREM IPSUM AVAILABLE, BUT THE MAJORITY HAVE SUFFERED ALTERATION IN SOME FORM, BY INJECTED HUMOUR, OR RANDOMISED WORDS WHICH DON\'T LOOK EVEN SLIGHTLY BELIEVABLE. IF YOU ARE GOING TO USE A PASSAGE OF LOREM IPSUM, YOU NEED TO BE SURE THERE ISN\'T ANYTHING EMBARRASSING HIDDEN IN THE MIDDLE OF TEXT', '1714488027_mision_img.jpg', 'VISION. THERE ARE MANY VARIATIONS OF PASSAGES OF LOREM IPSUM AVAILABLE, BUT THE MAJORITY HAVE SUFFERED ALTERATION IN SOME FORM, BY INJECTED HUMOUR, OR RANDOMISED WORDS WHICH DON\'T LOOK EVEN SLIGHTLY BELIEVABLE. IF YOU ARE GOING TO USE A PASSAGE OF LOREM IPSUM, YOU NEED TO BE SURE THERE ISN\'T ANYTHING EMBARRASSING HIDDEN IN THE MIDDLE OF TEXT', '1714488027_vision_img.jpg', 'NOSOTROS.THERE ARE MANY VARIATIONS OF PASSAGES OF LOREM IPSUM AVAILABLE, BUT THE MAJORITY HAVE SUFFERED ALTERATION IN SOME FORM, BY INJECTED HUMOUR, OR RANDOMISED WORDS WHICH DON\'T LOOK EVEN SLIGHTLY BELIEVABLE. IF YOU ARE GOING TO USE A PASSAGE OF LOREM IPSUM, YOU NEED TO BE SURE THERE ISN\'T ANYTHING EMBARRASSING HIDDEN IN THE MIDDLE OF TEXT', '1714488027_nosotros_img.jpg', 'https://facebook.com', 'https://instagram.com', 'https://twitter.com', 'https://youtube.com', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m21!1m12!1m3!1d15302.44340797871!2d-68.13196529479978!3d-16.495230895308648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m6!3e0!4m0!4m3!3m2!1d-16.497514656468287!2d-68.12797416816427!5e0!3m2!1ses-419!2sbo!4v1697748242821!5m2!1ses-419!2sbo\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>', '6LfkRtMpAAAAABQY3vuOlTcnEV1J_4Siv4BFeIvw', '6LfkRtMpAAAAAHCjmLqiuAbZYSknU7wMaPoMuPj9', NULL, '2024-05-06 19:35:44');
+(1, 'SISTEMA DE INVENTARIO Y VENTAS', 'SISCHAT', 'EMPRESA PRUEBA S.A.', '10000000000', 'LA PAZ', 'LA PAZ', '222222', '', 'ACTIVIDAD', 'SISCRM@GMAIL.COM', '1682712649_logo.jpg', 'SERVICIOS. THERE ARE MANY VARIATIONS OF PASSAGES OF LOREM IPSUM AVAILABLE, BUT THE MAJORITY HAVE SUFFERED ALTERATION IN SOME FORM, BY INJECTED HUMOUR, OR RANDOMISED WORDS WHICH DON\'T LOOK EVEN SLIGHTLY BELIEVABLE. IF YOU ARE GOING TO USE A PASSAGE OF LOREM IPSUM, YOU NEED TO BE SURE THERE ISN\'T ANYTHING EMBARRASSING HIDDEN IN THE MIDDLE OF TEXT', '1714488423_servicios_img.jpg', 'MISION. THERE ARE MANY VARIATIONS OF PASSAGES OF LOREM IPSUM AVAILABLE, BUT THE MAJORITY HAVE SUFFERED ALTERATION IN SOME FORM, BY INJECTED HUMOUR, OR RANDOMISED WORDS WHICH DON\'T LOOK EVEN SLIGHTLY BELIEVABLE. IF YOU ARE GOING TO USE A PASSAGE OF LOREM IPSUM, YOU NEED TO BE SURE THERE ISN\'T ANYTHING EMBARRASSING HIDDEN IN THE MIDDLE OF TEXT', '1714488027_mision_img.jpg', 'VISION. THERE ARE MANY VARIATIONS OF PASSAGES OF LOREM IPSUM AVAILABLE, BUT THE MAJORITY HAVE SUFFERED ALTERATION IN SOME FORM, BY INJECTED HUMOUR, OR RANDOMISED WORDS WHICH DON\'T LOOK EVEN SLIGHTLY BELIEVABLE. IF YOU ARE GOING TO USE A PASSAGE OF LOREM IPSUM, YOU NEED TO BE SURE THERE ISN\'T ANYTHING EMBARRASSING HIDDEN IN THE MIDDLE OF TEXT', '1714488027_vision_img.jpg', 'NOSOTROS.THERE ARE MANY VARIATIONS OF PASSAGES OF LOREM IPSUM AVAILABLE, BUT THE MAJORITY HAVE SUFFERED ALTERATION IN SOME FORM, BY INJECTED HUMOUR, OR RANDOMISED WORDS WHICH DON\'T LOOK EVEN SLIGHTLY BELIEVABLE. IF YOU ARE GOING TO USE A PASSAGE OF LOREM IPSUM, YOU NEED TO BE SURE THERE ISN\'T ANYTHING EMBARRASSING HIDDEN IN THE MIDDLE OF TEXT', '1714488027_nosotros_img.jpg', 'https://facebook.com', 'https://instagram.com', 'https://twitter.com', 'https://youtube.com', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m21!1m12!1m3!1d15302.44340797871!2d-68.13196529479978!3d-16.495230895308648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m6!3e0!4m0!4m3!3m2!1d-16.497514656468287!2d-68.12797416816427!5e0!3m2!1ses-419!2sbo!4v1697748242821!5m2!1ses-419!2sbo\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>', '6LfkRtMpAAAAABQY3vuOlTcnEV1J_4Siv4BFeIvw', '6LfkRtMpAAAAAHCjmLqiuAbZYSknU7wMaPoMuPj9', NULL, '2025-04-10 13:18:47');
 
 -- --------------------------------------------------------
 
@@ -310,9 +340,9 @@ INSERT INTO `configuracions` (`id`, `nombre_sistema`, `alias`, `razon_social`, `
 
 CREATE TABLE `configuracion_pagos` (
   `id` bigint UNSIGNED NOT NULL,
-  `banco` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nro_cuenta` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `qr` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `banco` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nro_cuenta` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `qr` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `fecha_registro` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -389,13 +419,13 @@ INSERT INTO `detalle_ventas` (`id`, `venta_id`, `producto_id`, `cantidad`, `prec
 
 CREATE TABLE `envio_correos` (
   `id` bigint UNSIGNED NOT NULL,
-  `host` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `puerto` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `encriptado` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `driver` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `host` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `puerto` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `encriptado` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `driver` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -415,10 +445,10 @@ INSERT INTO `envio_correos` (`id`, `host`, `puerto`, `encriptado`, `email`, `nom
 
 CREATE TABLE `envio_whatsapps` (
   `id` bigint UNSIGNED NOT NULL,
-  `sid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `from` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `url_phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `from` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `url_phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -428,7 +458,7 @@ CREATE TABLE `envio_whatsapps` (
 --
 
 INSERT INTO `envio_whatsapps` (`id`, `sid`, `token`, `from`, `url_phone`, `created_at`, `updated_at`) VALUES
-(1, 'cc391a2f', 'X3YWsIkHDjFs4gxR', '14157386102', 'Join ion ooze', NULL, '2024-05-03 20:18:16');
+(1, '54ed4e04', 'KLgG8bbJh1y6Olog', '14157386102', 'Join cane arena', NULL, '2024-05-03 20:18:16');
 
 -- --------------------------------------------------------
 
@@ -696,7 +726,32 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 (212, 1, 'ELIMINACIÓN', 'EL USUARIO  ANULÓ UNA ORDEN DE PEDIDO', 'celular: <br/>codigo: ORD.4<br/>comprobante: 1715026205_4.pdf<br/>configuracion_pago_id: 1<br/>created_at: 2024-05-06 16:10:05<br/>cupon: <br/>descuento: 0<br/>entrega: TIENDA<br/>estado: PEDIDO PENDIENTE<br/>fecha_registro: 2024-05-06<br/>id: 4<br/>lat: -16.496059<br/>lng: -68.133345<br/>nro: 4<br/>status: 1<br/>total: 12.00<br/>total_final: 12.00<br/>updated_at: 2024-05-06 16:26:30<br/>user_id: 15<br/>', NULL, 'ORDEN DE PEDIDOS', '2024-05-06', '16:26:44', '2024-05-06 20:26:44', '2024-05-06 20:26:44'),
 (213, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN CUPON', 'created_at: 2024-04-30 12:13:32<br/>descuento: 6<br/>id: 1<br/>texto: C001<br/>updated_at: 2024-04-30 12:14:05<br/>', 'created_at: 2024-04-30 12:13:32<br/>descuento: 5<br/>id: 1<br/>texto: C001<br/>updated_at: 2024-05-06 16:34:53<br/>', 'CUPONES', '2024-05-06', '16:34:53', '2024-05-06 20:34:53', '2024-05-06 20:34:53'),
 (214, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN CUPON', 'created_at: 2024-05-06 16:35:08<br/>descuento: 1<br/>id: 2<br/>texto: C002<br/>updated_at: 2024-05-06 16:35:08<br/>', NULL, 'CUPONES', '2024-05-06', '16:35:08', '2024-05-06 20:35:08', '2024-05-06 20:35:08'),
-(215, 10, 'CREACIÓN', 'EL USUARIO  REGISTRO UNA ORDEN DE PEDIDO', 'celular: <br/>codigo: ORD.5<br/>comprobante: C:\\USERS\\VICTO\\APPDATA\\LOCAL\\TEMP\\PHPB402.TMP<br/>configuracion_pago_id: 1<br/>created_at: 2024-05-07 14:12:07<br/>cupon: C001<br/>descuento: 5<br/>entrega: DOMICILIO<br/>estado: PEDIDO PENDIENTE<br/>fecha_registro: 2024-05-07<br/>id: 5<br/>lat: -16.4969333667204<br/>lng: -68.13183491643645<br/>nro: 5<br/>status: <br/>total: 94.00<br/>total_final: 89.3<br/>updated_at: 2024-05-07 14:12:07<br/>user_id: 10<br/>', NULL, 'ORDEN DE PEDIDOS', '2024-05-07', '14:12:07', '2024-05-07 18:12:07', '2024-05-07 18:12:07');
+(215, 10, 'CREACIÓN', 'EL USUARIO  REGISTRO UNA ORDEN DE PEDIDO', 'celular: <br/>codigo: ORD.5<br/>comprobante: C:\\USERS\\VICTO\\APPDATA\\LOCAL\\TEMP\\PHPB402.TMP<br/>configuracion_pago_id: 1<br/>created_at: 2024-05-07 14:12:07<br/>cupon: C001<br/>descuento: 5<br/>entrega: DOMICILIO<br/>estado: PEDIDO PENDIENTE<br/>fecha_registro: 2024-05-07<br/>id: 5<br/>lat: -16.4969333667204<br/>lng: -68.13183491643645<br/>nro: 5<br/>status: <br/>total: 94.00<br/>total_final: 89.3<br/>updated_at: 2024-05-07 14:12:07<br/>user_id: 10<br/>', NULL, 'ORDEN DE PEDIDOS', '2024-05-07', '14:12:07', '2024-05-07 18:12:07', '2024-05-07 18:12:07'),
+(216, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN CAMPAÑA', 'id: 7<br/>nombre: CAMPAÑA #2<br/>fecha_ini: 2024-04-28<br/>fecha_fin: 2024-05-05<br/>tipo: CATÁLOGO<br/>tipo_cliente: PERSONALIZADO<br/>filtro_cliente: CLIENTES ESPECIFICOS<br/>producto_id: 7<br/>cantidad_compra: <br/>descripcion: DESC. CAMPAÑA #2<br/>catalogo_id: 1<br/>fecha_registro: 2024-04-28<br/>created_at: 2024-04-28 13:19:53<br/>updated_at: 2024-05-03 16:54:32<br/>', 'id: 7<br/>nombre: CAMPAÑA #2<br/>fecha_ini: 2024-04-28<br/>fecha_fin: 2024-05-05<br/>tipo: CATÁLOGO<br/>tipo_cliente: PERSONALIZADO<br/>filtro_cliente: CLIENTES ESPECIFICOS<br/>producto_id: 7<br/>cantidad_compra: <br/>descripcion: DESC. CAMPAÑA #2<br/>catalogo_id: 1<br/>fecha_registro: 2024-04-28<br/>created_at: 2024-04-28 13:19:53<br/>updated_at: 2024-05-03 16:54:32<br/>', 'CAMPAÑAS', '2024-05-08', '16:21:45', '2024-05-08 20:21:45', '2024-05-08 20:21:45'),
+(217, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN CAMPAÑA', 'id: 7<br/>nombre: CAMPAÑA #2<br/>fecha_ini: 2024-04-28<br/>fecha_fin: 2024-05-05<br/>tipo: CATÁLOGO<br/>tipo_cliente: PERSONALIZADO<br/>filtro_cliente: CLIENTES ESPECIFICOS<br/>producto_id: 7<br/>cantidad_compra: <br/>descripcion: DESC. CAMPAÑA #2<br/>catalogo_id: 1<br/>fecha_registro: 2024-04-28<br/>created_at: 2024-04-28 13:19:53<br/>updated_at: 2024-05-03 16:54:32<br/>', 'id: 7<br/>nombre: CAMPAÑA #2<br/>fecha_ini: 2024-04-28<br/>fecha_fin: 2024-05-08<br/>tipo: CATÁLOGO<br/>tipo_cliente: PERSONALIZADO<br/>filtro_cliente: CLIENTES ESPECIFICOS<br/>producto_id: 7<br/>cantidad_compra: <br/>descripcion: DESC. CAMPAÑA #2<br/>catalogo_id: 1<br/>fecha_registro: 2024-04-28<br/>created_at: 2024-04-28 13:19:53<br/>updated_at: 2024-05-08 16:21:59<br/>', 'CAMPAÑAS', '2024-05-08', '16:21:59', '2024-05-08 20:21:59', '2024-05-08 20:21:59'),
+(218, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ LA CONFIGURACIÓN DEL SISTEMA', 'id: 1<br/>nombre_sistema: SISTEMA DE INVENTARIO Y VENTAS<br/>alias: SISCRM<br/>razon_social: EMPRESA PRUEBA S.A.<br/>nit: 10000000000<br/>ciudad: LA PAZ<br/>dir: LA PAZ<br/>fono: 222222<br/>web: <br/>actividad: ACTIVIDAD<br/>correo: SISCRM@GMAIL.COM<br/>logo: 1682712649_logo.jpg<br/>servicios: SERVICIOS. THERE ARE MANY VARIATIONS OF PASSAGES OF LOREM IPSUM AVAILABLE, BUT THE MAJORITY HAVE SUFFERED ALTERATION IN SOME FORM, BY INJECTED HUMOUR, OR RANDOMISED WORDS WHICH DON\'T LOOK EVEN SLIGHTLY BELIEVABLE. IF YOU ARE GOING TO USE A PASSAGE OF LOREM IPSUM, YOU NEED TO BE SURE THERE ISN\'T ANYTHING EMBARRASSING HIDDEN IN THE MIDDLE OF TEXT<br/>servicios_img: 1714488423_servicios_img.jpg<br/>mision: MISION. THERE ARE MANY VARIATIONS OF PASSAGES OF LOREM IPSUM AVAILABLE, BUT THE MAJORITY HAVE SUFFERED ALTERATION IN SOME FORM, BY INJECTED HUMOUR, OR RANDOMISED WORDS WHICH DON\'T LOOK EVEN SLIGHTLY BELIEVABLE. IF YOU ARE GOING TO USE A PASSAGE OF LOREM IPSUM, YOU NEED TO BE SURE THERE ISN\'T ANYTHING EMBARRASSING HIDDEN IN THE MIDDLE OF TEXT<br/>mision_img: 1714488027_mision_img.jpg<br/>vision: VISION. THERE ARE MANY VARIATIONS OF PASSAGES OF LOREM IPSUM AVAILABLE, BUT THE MAJORITY HAVE SUFFERED ALTERATION IN SOME FORM, BY INJECTED HUMOUR, OR RANDOMISED WORDS WHICH DON\'T LOOK EVEN SLIGHTLY BELIEVABLE. IF YOU ARE GOING TO USE A PASSAGE OF LOREM IPSUM, YOU NEED TO BE SURE THERE ISN\'T ANYTHING EMBARRASSING HIDDEN IN THE MIDDLE OF TEXT<br/>vision_img: 1714488027_vision_img.jpg<br/>nosotros: NOSOTROS.THERE ARE MANY VARIATIONS OF PASSAGES OF LOREM IPSUM AVAILABLE, BUT THE MAJORITY HAVE SUFFERED ALTERATION IN SOME FORM, BY INJECTED HUMOUR, OR RANDOMISED WORDS WHICH DON\'T LOOK EVEN SLIGHTLY BELIEVABLE. IF YOU ARE GOING TO USE A PASSAGE OF LOREM IPSUM, YOU NEED TO BE SURE THERE ISN\'T ANYTHING EMBARRASSING HIDDEN IN THE MIDDLE OF TEXT<br/>nosotros_img: 1714488027_nosotros_img.jpg<br/>facebook: https://facebook.com<br/>instagram: https://instagram.com<br/>twitter: https://twitter.com<br/>youtube: https://youtube.com<br/>ubicacion: <iframe src=\"https://www.google.com/maps/embed?pb=!1m21!1m12!1m3!1d15302.44340797871!2d-68.13196529479978!3d-16.495230895308648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m6!3e0!4m0!4m3!3m2!1d-16.497514656468287!2d-68.12797416816427!5e0!3m2!1ses-419!2sbo!4v1697748242821!5m2!1ses-419!2sbo\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe><br/>captcha_local: 6LfkRtMpAAAAABQY3vuOlTcnEV1J_4Siv4BFeIvw<br/>captcha_servidor: 6LfkRtMpAAAAAHCjmLqiuAbZYSknU7wMaPoMuPj9<br/>created_at: <br/>updated_at: 2024-05-06 15:35:44<br/>', 'id: 1<br/>nombre_sistema: SISTEMA DE INVENTARIO Y VENTAS<br/>alias: SISCHAT<br/>razon_social: EMPRESA PRUEBA S.A.<br/>nit: 10000000000<br/>ciudad: LA PAZ<br/>dir: LA PAZ<br/>fono: 222222<br/>web: <br/>actividad: ACTIVIDAD<br/>correo: SISCRM@GMAIL.COM<br/>logo: 1682712649_logo.jpg<br/>servicios: SERVICIOS. THERE ARE MANY VARIATIONS OF PASSAGES OF LOREM IPSUM AVAILABLE, BUT THE MAJORITY HAVE SUFFERED ALTERATION IN SOME FORM, BY INJECTED HUMOUR, OR RANDOMISED WORDS WHICH DON\'T LOOK EVEN SLIGHTLY BELIEVABLE. IF YOU ARE GOING TO USE A PASSAGE OF LOREM IPSUM, YOU NEED TO BE SURE THERE ISN\'T ANYTHING EMBARRASSING HIDDEN IN THE MIDDLE OF TEXT<br/>servicios_img: 1714488423_servicios_img.jpg<br/>mision: MISION. THERE ARE MANY VARIATIONS OF PASSAGES OF LOREM IPSUM AVAILABLE, BUT THE MAJORITY HAVE SUFFERED ALTERATION IN SOME FORM, BY INJECTED HUMOUR, OR RANDOMISED WORDS WHICH DON\'T LOOK EVEN SLIGHTLY BELIEVABLE. IF YOU ARE GOING TO USE A PASSAGE OF LOREM IPSUM, YOU NEED TO BE SURE THERE ISN\'T ANYTHING EMBARRASSING HIDDEN IN THE MIDDLE OF TEXT<br/>mision_img: 1714488027_mision_img.jpg<br/>vision: VISION. THERE ARE MANY VARIATIONS OF PASSAGES OF LOREM IPSUM AVAILABLE, BUT THE MAJORITY HAVE SUFFERED ALTERATION IN SOME FORM, BY INJECTED HUMOUR, OR RANDOMISED WORDS WHICH DON\'T LOOK EVEN SLIGHTLY BELIEVABLE. IF YOU ARE GOING TO USE A PASSAGE OF LOREM IPSUM, YOU NEED TO BE SURE THERE ISN\'T ANYTHING EMBARRASSING HIDDEN IN THE MIDDLE OF TEXT<br/>vision_img: 1714488027_vision_img.jpg<br/>nosotros: NOSOTROS.THERE ARE MANY VARIATIONS OF PASSAGES OF LOREM IPSUM AVAILABLE, BUT THE MAJORITY HAVE SUFFERED ALTERATION IN SOME FORM, BY INJECTED HUMOUR, OR RANDOMISED WORDS WHICH DON\'T LOOK EVEN SLIGHTLY BELIEVABLE. IF YOU ARE GOING TO USE A PASSAGE OF LOREM IPSUM, YOU NEED TO BE SURE THERE ISN\'T ANYTHING EMBARRASSING HIDDEN IN THE MIDDLE OF TEXT<br/>nosotros_img: 1714488027_nosotros_img.jpg<br/>facebook: https://facebook.com<br/>instagram: https://instagram.com<br/>twitter: https://twitter.com<br/>youtube: https://youtube.com<br/>ubicacion: <iframe src=\"https://www.google.com/maps/embed?pb=!1m21!1m12!1m3!1d15302.44340797871!2d-68.13196529479978!3d-16.495230895308648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m6!3e0!4m0!4m3!3m2!1d-16.497514656468287!2d-68.12797416816427!5e0!3m2!1ses-419!2sbo!4v1697748242821!5m2!1ses-419!2sbo\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe><br/>captcha_local: 6LfkRtMpAAAAABQY3vuOlTcnEV1J_4Siv4BFeIvw<br/>captcha_servidor: 6LfkRtMpAAAAAHCjmLqiuAbZYSknU7wMaPoMuPj9<br/>created_at: <br/>updated_at: 2025-04-10 09:18:47<br/>', 'CONFIGURACIÓN', '2025-04-10', '09:18:47', '2025-04-10 13:18:47', '2025-04-10 13:18:47'),
+(219, 10, 'CREACIÓN', 'EL USUARIO  REGISTRO UNA ORDEN DE PEDIDO', 'celular: <br/>codigo: ORD.6<br/>comprobante: C:\\WINDOWS\\TEMP\\PHPF757.TMP<br/>configuracion_pago_id: 1<br/>created_at: 2025-04-13 19:36:06<br/>cupon: <br/>descuento: 0<br/>entrega: TIENDA<br/>estado: PEDIDO PENDIENTE<br/>fecha_registro: 2025-04-13<br/>id: 6<br/>lat: -16.496059<br/>lng: -68.133345<br/>nro: 6<br/>status: <br/>total: 20.00<br/>total_final: 20<br/>updated_at: 2025-04-13 19:36:06<br/>user_id: 10<br/>', NULL, 'ORDEN DE PEDIDOS', '2025-04-13', '19:36:06', '2025-04-13 23:36:06', '2025-04-13 23:36:06');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `historial_clientes`
+--
+
+CREATE TABLE `historial_clientes` (
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `producto_id` bigint UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `historial_clientes`
+--
+
+INSERT INTO `historial_clientes` (`id`, `user_id`, `producto_id`, `created_at`, `updated_at`) VALUES
+(1, 10, 1, '2025-04-13 23:36:06', '2025-04-13 23:36:06');
 
 -- --------------------------------------------------------
 
@@ -812,7 +867,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (13, '2024_04_28_101519_create_catalogos_table', 13),
 (14, '2024_04_28_101708_create_catalogo_detalles_table', 14),
 (15, '2024_04_28_104529_create_recuperacions_table', 15),
-(16, '2024_04_30_120533_create_cupons_table', 16);
+(16, '2024_04_30_120533_create_cupons_table', 16),
+(17, '2025_04_13_191858_create_historial_clientes_table', 17),
+(18, '2025_04_13_192840_create_sugerencia_diarias_table', 18),
+(19, '2025_04_13_195234_create_chats_table', 19);
 
 -- --------------------------------------------------------
 
@@ -844,7 +902,8 @@ INSERT INTO `orden_detalles` (`id`, `orden_pedido_id`, `producto_id`, `cantidad`
 (6, 3, 2, 2.00, 35.00, 70.00, '2024-04-30 16:39:49', '2024-04-30 16:39:49'),
 (7, 4, 7, 1.00, 12.00, 12.00, '2024-05-06 20:10:05', '2024-05-06 20:10:05'),
 (8, 5, 2, 2.00, 35.00, 70.00, '2024-05-07 18:12:07', '2024-05-07 18:12:07'),
-(9, 5, 7, 2.00, 12.00, 24.00, '2024-05-07 18:12:07', '2024-05-07 18:12:07');
+(9, 5, 7, 2.00, 12.00, 24.00, '2024-05-07 18:12:07', '2024-05-07 18:12:07'),
+(10, 6, 1, 1.00, 20.00, 20.00, '2025-04-13 23:36:06', '2025-04-13 23:36:06');
 
 -- --------------------------------------------------------
 
@@ -854,19 +913,19 @@ INSERT INTO `orden_detalles` (`id`, `orden_pedido_id`, `producto_id`, `cantidad`
 
 CREATE TABLE `orden_pedidos` (
   `id` bigint UNSIGNED NOT NULL,
-  `codigo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `codigo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `nro` bigint NOT NULL,
   `configuracion_pago_id` bigint UNSIGNED NOT NULL,
   `celular` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `comprobante` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `lat` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `lng` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `comprobante` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lng` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `total` decimal(24,2) NOT NULL,
-  `entrega` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cupon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `entrega` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cupon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `descuento` double(8,2) DEFAULT NULL,
   `total_final` decimal(24,2) NOT NULL,
-  `estado` varchar(155) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `estado` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint UNSIGNED NOT NULL,
   `fecha_registro` date NOT NULL,
   `status` int NOT NULL DEFAULT '1',
@@ -883,7 +942,8 @@ INSERT INTO `orden_pedidos` (`id`, `codigo`, `nro`, `configuracion_pago_id`, `ce
 (2, 'ORD.2', 2, 1, '666666666', '1714494532_2.pdf', '-16.496059', '-68.133345', 112.00, 'DOMICILIO', 'C001', 6.00, 105.28, 'ORDEN PROCESADA', 10, '2024-04-30', 1, '2024-04-30 16:28:52', '2024-04-30 16:41:36'),
 (3, 'ORD.3', 3, 2, '67676767', '1714495189_3.pdf', '-16.498088388840433', '-68.13366216194534', 82.00, 'TIENDA', 'C001', 6.00, 77.08, 'PEDIDO PENDIENTE', 11, '2024-04-30', 1, '2024-04-30 16:39:49', '2024-04-30 16:39:49'),
 (4, 'ORD.4', 4, 1, '', '1715026205_4.pdf', '-16.496059', '-68.133345', 12.00, 'TIENDA', '', 0.00, 12.00, 'PEDIDO PENDIENTE', 15, '2024-05-06', 0, '2024-05-06 20:10:05', '2024-05-06 20:26:44'),
-(5, 'ORD.5', 5, 1, '', '1715105527_5.pdf', '-16.4969333667204', '-68.13183491643645', 94.00, 'DOMICILIO', 'C001', 5.00, 89.30, 'PEDIDO PENDIENTE', 10, '2024-05-07', 1, '2024-05-07 18:12:07', '2024-05-07 18:12:07');
+(5, 'ORD.5', 5, 1, '', '1715105527_5.pdf', '-16.4969333667204', '-68.13183491643645', 94.00, 'DOMICILIO', 'C001', 5.00, 89.30, 'PEDIDO PENDIENTE', 10, '2024-05-07', 1, '2024-05-07 18:12:07', '2024-05-07 18:12:07'),
+(6, 'ORD.6', 6, 1, '', '1744587366_6.pdf', '-16.496059', '-68.133345', 20.00, 'TIENDA', '', 0.00, 20.00, 'PEDIDO PENDIENTE', 10, '2025-04-13', 1, '2025-04-13 23:36:06', '2025-04-13 23:36:06');
 
 -- --------------------------------------------------------
 
@@ -949,8 +1009,8 @@ CREATE TABLE `proveedors` (
   `dir` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `fono` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `nombre_contacto` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `paterno` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `materno` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `paterno` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `materno` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `descripcion` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `fecha_registro` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -1010,6 +1070,29 @@ CREATE TABLE `salida_productos` (
 
 INSERT INTO `salida_productos` (`id`, `producto_id`, `cantidad`, `fecha_salida`, `tipo_salida_id`, `descripcion`, `fecha_registro`, `created_at`, `updated_at`) VALUES
 (3, 1, 3, '2023-04-25', 1, '', '2023-04-25', '2023-04-25 19:47:12', '2023-04-26 20:46:46');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sugerencia_diarias`
+--
+
+CREATE TABLE `sugerencia_diarias` (
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `fecha` date NOT NULL,
+  `hora` time NOT NULL,
+  `tipo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `sugerencia_diarias`
+--
+
+INSERT INTO `sugerencia_diarias` (`id`, `user_id`, `fecha`, `hora`, `tipo`, `created_at`, `updated_at`) VALUES
+(1, 10, '2025-04-13', '20:58:00', NULL, '2025-04-14 00:58:39', '2025-04-14 00:58:39');
 
 -- --------------------------------------------------------
 
@@ -1096,7 +1179,8 @@ INSERT INTO `users` (`id`, `usuario`, `nombre`, `paterno`, `materno`, `ci`, `ci_
 (12, 'martin@gmail.com', 'MARTIN', NULL, NULL, '543543543', 'CB', 'LOS OLIVOS', 'martin@gmail.com', '', 'CLIENTE', NULL, '$2y$10$CSWAbZ.PIkqZMtF6CstM9uSNenajGLEMHgLel10UTPBEqPhmWE6ze', 1, '2024-05-06', '2024-05-06 17:44:07', '2024-05-06 17:44:07'),
 (13, 'marisol@gmail.com', 'MARISOL', NULL, NULL, '43343434', 'SC', '', 'marisol@gmail.com', '', 'CLIENTE', NULL, '$2y$10$Y3hXkWECiArmANPC3vItJe6atLiAHEBWgD2FkfAxvFVX/xfvw0mRu', 0, '2024-05-06', '2024-05-06 17:44:47', '2024-05-06 17:44:47'),
 (14, 'a', 'MARITZA', NULL, NULL, '4334343', 'SC', 'A', 'a', '', 'CLIENTE', NULL, '$2y$10$GngeMKbI.3Nda8kfOtWoiuKejhRPcW3qFpZNWllJcsiSIJsgqbpYS', 1, '2024-05-06', '2024-05-06 17:49:50', '2024-05-06 17:49:50'),
-(15, 'ALVARO@GMAIL.COM', 'ALVARO', 'CARDENAS', NULL, '343434', 'SC', 'LOS OLIVOS', 'ALVARO@GMAIL.COM', '', 'CLIENTE', NULL, '$2y$10$yu2bVe673t3j82.Jwo0FbelyIIQ6w8q.rw47GcgvQihCqYS.U1i7e', 1, '2024-05-06', '2024-05-06 17:57:03', '2024-05-06 20:13:25');
+(15, 'ALVARO@GMAIL.COM', 'ALVARO', 'CARDENAS', NULL, '343434', 'SC', 'LOS OLIVOS', 'ALVARO@GMAIL.COM', '', 'CLIENTE', NULL, '$2y$10$yu2bVe673t3j82.Jwo0FbelyIIQ6w8q.rw47GcgvQihCqYS.U1i7e', 1, '2024-05-06', '2024-05-06 17:57:03', '2024-05-06 20:13:25'),
+(16, 'luis@gmail.com', 'LUIS', NULL, NULL, '234234', 'LP', 'LOS OLIVOS', 'luis@gmail.com', '', 'CLIENTE', NULL, '$2y$10$wzXvdqxxfmJSYYGlkrwLZu27X1oN6rD0cRETdwifMybsRHTXtCfoq', 1, '2024-05-09', '2024-05-10 02:50:13', '2024-05-10 02:50:13');
 
 -- --------------------------------------------------------
 
@@ -1113,7 +1197,7 @@ CREATE TABLE `ventas` (
   `descuento` double(8,2) NOT NULL,
   `total_final` decimal(24,2) NOT NULL,
   `estado` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tipo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `orden_pedido_id` bigint UNSIGNED DEFAULT NULL,
   `fecha_registro` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -1186,6 +1270,12 @@ ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `chats`
+--
+ALTER TABLE `chats`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `clientes`
 --
 ALTER TABLE `clientes`
@@ -1242,6 +1332,14 @@ ALTER TABLE `fecha_stocks`
 --
 ALTER TABLE `historial_accions`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `historial_clientes`
+--
+ALTER TABLE `historial_clientes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `historial_clientes_user_id_foreign` (`user_id`),
+  ADD KEY `historial_clientes_producto_id_foreign` (`producto_id`);
 
 --
 -- Indices de la tabla `ingreso_productos`
@@ -1315,6 +1413,12 @@ ALTER TABLE `salida_productos`
   ADD KEY `salida_productos_tipo_salida_id_foreign` (`tipo_salida_id`);
 
 --
+-- Indices de la tabla `sugerencia_diarias`
+--
+ALTER TABLE `sugerencia_diarias`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `tipo_ingresos`
 --
 ALTER TABLE `tipo_ingresos`
@@ -1366,13 +1470,13 @@ ALTER TABLE `campania_automaticas`
 -- AUTO_INCREMENT de la tabla `campania_detalles`
 --
 ALTER TABLE `campania_detalles`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `campania_envios`
 --
 ALTER TABLE `campania_envios`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `catalogos`
@@ -1393,10 +1497,16 @@ ALTER TABLE `categorias`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT de la tabla `chats`
+--
+ALTER TABLE `chats`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `configuracions`
@@ -1444,7 +1554,13 @@ ALTER TABLE `fecha_stocks`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=220;
+
+--
+-- AUTO_INCREMENT de la tabla `historial_clientes`
+--
+ALTER TABLE `historial_clientes`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `ingreso_productos`
@@ -1462,19 +1578,19 @@ ALTER TABLE `kardex_productos`
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `orden_detalles`
 --
 ALTER TABLE `orden_detalles`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `orden_pedidos`
 --
 ALTER TABLE `orden_pedidos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`
@@ -1507,6 +1623,12 @@ ALTER TABLE `salida_productos`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT de la tabla `sugerencia_diarias`
+--
+ALTER TABLE `sugerencia_diarias`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `tipo_ingresos`
 --
 ALTER TABLE `tipo_ingresos`
@@ -1522,7 +1644,7 @@ ALTER TABLE `tipo_salidas`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
@@ -1545,6 +1667,13 @@ ALTER TABLE `clientes`
 --
 ALTER TABLE `fecha_stocks`
   ADD CONSTRAINT `fecha_stocks_producto_id_foreign` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `historial_clientes`
+--
+ALTER TABLE `historial_clientes`
+  ADD CONSTRAINT `historial_clientes_producto_id_foreign` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`),
+  ADD CONSTRAINT `historial_clientes_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Filtros para la tabla `orden_detalles`

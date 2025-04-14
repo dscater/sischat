@@ -9,10 +9,10 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ConfiguracionController;
 use App\Http\Controllers\ConfiguracionPagoController;
 use App\Http\Controllers\CuponController;
-use App\Http\Controllers\EnviarWhatsappController;
 use App\Http\Controllers\EnvioCorreoController;
 use App\Http\Controllers\EnvioWhatsappController;
 use App\Http\Controllers\HistorialAccionController;
+use App\Http\Controllers\HistorialClienteController;
 use App\Http\Controllers\IngresoProductoController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrdenPedidoController;
@@ -99,12 +99,20 @@ Route::middleware(['auth'])->group(function () {
         Route::post('usuarios/actualizaContrasenia/{usuario}', [UserController::class, 'actualizaContrasenia']);
         Route::post('usuarios/actualizaFoto/{usuario}', [UserController::class, 'actualizaFoto']);
         Route::resource('usuarios', UserController::class)->only([
-            'index', 'store', 'update', 'destroy', 'show'
+            'index',
+            'store',
+            'update',
+            'destroy',
+            'show'
         ]);
 
         // Proveedores
         Route::resource('proveedors', ProveedorController::class)->only([
-            'index', 'store', 'update', 'destroy', 'show'
+            'index',
+            'store',
+            'update',
+            'destroy',
+            'show'
         ]);
 
         // Productos
@@ -116,53 +124,93 @@ Route::middleware(['auth'])->group(function () {
         Route::get("productos/getStock", [ProductoController::class, 'getStock']);
         Route::get("productos/buscar_producto", [ProductoController::class, 'buscar_producto']);
         Route::resource('productos', ProductoController::class)->only([
-            'index', 'store', 'update', 'destroy', 'show'
+            'index',
+            'store',
+            'update',
+            'destroy',
+            'show'
         ]);
 
         // Categorias
         Route::resource('categorias', CategoriaController::class)->only([
-            'index', 'store', 'update', 'destroy', 'show'
+            'index',
+            'store',
+            'update',
+            'destroy',
+            'show'
         ]);
 
         // Tipo Ingresos
         Route::resource('tipo_ingresos', TipoIngresoController::class)->only([
-            'index', 'store', 'update', 'destroy', 'show'
+            'index',
+            'store',
+            'update',
+            'destroy',
+            'show'
         ]);
 
         // Ingreso productos
         Route::resource('ingreso_productos', IngresoProductoController::class)->only([
-            'index', 'store', 'update', 'destroy', 'show'
+            'index',
+            'store',
+            'update',
+            'destroy',
+            'show'
         ]);
 
         // Tipo Salidas
         Route::resource('tipo_salidas', TipoSalidaController::class)->only([
-            'index', 'store', 'update', 'destroy', 'show'
+            'index',
+            'store',
+            'update',
+            'destroy',
+            'show'
         ]);
 
         // Salida productos
         Route::resource('salida_productos', SalidaProductoController::class)->only([
-            'index', 'store', 'update', 'destroy', 'show'
+            'index',
+            'store',
+            'update',
+            'destroy',
+            'show'
         ]);
 
         // Clientes
         Route::resource('clientes', ClienteController::class)->only([
-            'index', 'store', 'update', 'destroy', 'show'
+            'index',
+            'store',
+            'update',
+            'destroy',
+            'show'
         ]);
 
         // Catalogos
         Route::resource('catalogos', CatalogoController::class)->only([
-            'index', 'store', 'update', 'destroy', 'show'
+            'index',
+            'store',
+            'update',
+            'destroy',
+            'show'
         ]);
 
         // Campaña Whatsapp
         Route::post('campanias/enviarCampania/{campania}', [CampaniaController::class, 'enviarCampania']);
         Route::resource('campanias', CampaniaController::class)->only([
-            'index', 'store', 'update', 'destroy', 'show'
+            'index',
+            'store',
+            'update',
+            'destroy',
+            'show'
         ]);
 
         // Campaña automaticas
         Route::resource('campania_automaticas', CampaniaAutomaticaController::class)->only([
-            'index', 'store', 'update', 'destroy', 'show'
+            'index',
+            'store',
+            'update',
+            'destroy',
+            'show'
         ]);
 
         // CONFIGURACION PAGOS
@@ -180,6 +228,9 @@ Route::middleware(['auth'])->group(function () {
             ["index", "store"]
         );
 
+        // HISTORIAL CLIENTES
+        Route::get("historial_clientes/getRegistros", [HistorialClienteController::class, 'getRegistros']);
+
         // ORDEN PEDIDOS
         Route::patch("orden_pedidos/actualiza_estado/{orden_pedido}", [OrdenPedidoController::class, 'actualiza_estado'])->name("orden_pedidos.actualiza_estado");
         Route::patch("orden_pedidos/habilitar/{orden_pedido}", [OrdenPedidoController::class, 'habilitar'])->name("orden_pedidos.habilitar");
@@ -193,12 +244,17 @@ Route::middleware(['auth'])->group(function () {
         Route::get("ventas/info/getLiteral", [VentaController::class, 'getLiteral']);
         Route::get("ventas/info/devolucions", [VentaController::class, 'getDevolucions']);
         Route::resource('ventas', VentaController::class)->only([
-            'index', 'store', 'update', 'destroy', 'show'
+            'index',
+            'store',
+            'update',
+            'destroy',
+            'show'
         ]);
 
         // historial acciones
         Route::resource('historial_accions', HistorialAccionController::class)->only([
-            'index', 'show'
+            'index',
+            'show'
         ]);
 
         // Analisis BI

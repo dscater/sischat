@@ -5,6 +5,8 @@
             <router-view></router-view>
         </transition>
 
+        <Chat v-if="oUser && user"></Chat>
+
         <Footer
             :logo="logo"
             :empresa="oConfiguracion.alias ? oConfiguracion.alias : 'Empresa'"
@@ -25,6 +27,7 @@ import Sidebar from "./componentes/Sidebar.vue";
 import ModalProducto from "./componentes/ModalProducto.vue";
 import CarritoLateral from "./componentes/CarritoLateral.vue";
 import Footer from "./componentes/Footer.vue";
+import Chat from "./componentes/Chat.vue";
 
 export default {
     components: {
@@ -32,6 +35,7 @@ export default {
         Sidebar,
         CarritoLateral,
         Footer,
+        Chat,
     },
     props: {
         logo: {
@@ -70,10 +74,16 @@ export default {
                 typeof this.configuracion == "string"
                     ? JSON.parse(this.configuracion)
                     : this.configuracion,
+            user: JSON.parse(localStorage.getItem("user")),
+            oUser: null,
         };
     },
     mounted() {
         this.funcionesPortal();
+        this.getAuth();
+        console.log(this.oUser);
+        console.log('oUser al montar:', this.oUser, typeof this.oUser);
+        console.log("------");
     },
     methods: {
         funcionesPortal() {
@@ -94,6 +104,11 @@ export default {
             });
             // Initiate the wowjs
             new WOW().init();
+        },
+        getAuth() {
+            axios.get(main_url + "/auth").then((response) => {
+                this.oUser = response.data;
+            });
         },
     },
 };

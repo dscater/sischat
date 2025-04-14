@@ -246,6 +246,14 @@ export default {
 <style>
 .login-page {
     background: var(--secundario);
+    background-size: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    height: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .login-page .card {

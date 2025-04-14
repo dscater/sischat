@@ -714,6 +714,9 @@ export default {
                     localStorage.removeItem("carrito_siscrm");
                     this.limpiarOrdenPedido();
                     this.enviando = false;
+                    setTimeout(()=>{
+                        window.location.reload();
+                    })
                 })
                 .catch((error) => {
                     this.enviando = false;

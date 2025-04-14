@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-primary">
+        <nav class="main-header navbar navbar-expand navbar-primary bg-blue">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cupon;
 use App\Models\HistorialAccion;
+use App\Models\HistorialCliente;
 use App\Models\KardexProducto;
 use App\Models\OrdenPedido;
 use App\Models\Producto;
@@ -91,6 +92,12 @@ class OrdenPedidoController extends Controller
                     "cantidad" => $cantidades[$key],
                     "precio" => $precios[$key],
                     "precio_total" => $precio_total[$key],
+                ]);
+
+                // registrar historial
+                HistorialCliente::create([
+                    "user_id" => Auth::user()->id,
+                    "producto_id" => $producto,
                 ]);
             }
 

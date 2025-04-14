@@ -112,9 +112,7 @@
                                             }}</span>
                                         </div>
                                         <h2>
-                                            <span>{{
-                                                item.nombre
-                                            }}</span>
+                                            <span>{{ item.nombre }}</span>
                                         </h2>
                                         <div class="product-price">
                                             <span>Bs. {{ item.precio }} </span>
@@ -216,7 +214,9 @@
                                             <a
                                                 aria-label="Add To Cart"
                                                 class="action-btn hover-up"
-                                                href="shop-cart.html"
+                                                @click.prevent="
+                                                    showModalProducto(item.id)
+                                                "
                                                 ><i
                                                     class="fi-rs-shopping-bag-add"
                                                 ></i
